@@ -17,7 +17,10 @@ import java.math.BigDecimal;
 public class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="accountId")
     private int id;
+    @Column(name="accountBranch")
     private String branch;
+    @Column(name="accountBalance")
     private BigDecimal balance;
 }
