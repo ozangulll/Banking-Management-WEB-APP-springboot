@@ -19,7 +19,7 @@ public class Accounts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="accountId")
     private int id;
-    @Column(name="accountBranch")
+    @Column(name="accountBranch",length=16)
     private String branch;
     @Column(name="accountBalance")
     private BigDecimal balance;

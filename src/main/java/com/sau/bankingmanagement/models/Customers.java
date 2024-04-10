@@ -17,10 +17,10 @@ public class Customers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="customerId")
     private int id;
-    @Column(name="customerName")
+    @Column(name="customerName",length = 16)
     private String name;
-    @Column(name="customerAddress")
+    @Column(name="customerAddress", length = 32)
     private String address;
-    @Column(name="customerCity")
+    @Column(name="customerCity",length = 16)
     private String city;
 }
