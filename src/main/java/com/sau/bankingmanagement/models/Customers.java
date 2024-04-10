@@ -15,8 +15,12 @@ import lombok.NoArgsConstructor;
 public class Customers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="customerId")
     private int id;
+    @Column(name="customerName")
     private String name;
+    @Column(name="customerAddress")
     private String address;
+    @Column(name="customerCity")
     private String city;
 }

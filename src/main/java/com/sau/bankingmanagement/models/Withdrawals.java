@@ -19,10 +19,20 @@ import java.time.LocalDateTime;
 public class Withdrawals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="withdrawalId")
     private int withdrawalid;
-    private int customerid;
-    private int accountid;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customers customer;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Accounts account;
+
     @CreationTimestamp
+    @Column(name="transactionDate")
     private LocalDateTime date;
+    @Column(name="amount")
     private BigDecimal amount;
 }
