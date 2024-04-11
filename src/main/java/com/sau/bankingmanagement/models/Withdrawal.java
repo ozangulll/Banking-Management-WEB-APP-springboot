@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.jmx.export.annotation.ManagedResource;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name="withdrawals")
+@Check(constraints = "amount=>0")
 public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +36,7 @@ public class Withdrawal {
     @CreationTimestamp
     @Column(name="transactionDate")
     private LocalDateTime date;
+
     @Column(name="amount")
     private BigDecimal amount;
 }
