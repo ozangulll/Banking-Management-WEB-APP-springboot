@@ -20,7 +20,7 @@ public class CustomerController {
         this.customerRepository = customerRepository;
     }
 
-    @GetMapping ("/clubs")
+    @GetMapping ("/customers")
     public String listCustomers(Model model){
         List<Customer> customers = customerRepository.findAll();
         model.addAttribute("customers", customers);
