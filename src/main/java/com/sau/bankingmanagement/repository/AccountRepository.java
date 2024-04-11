@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account,Integer> {
 
-    Optional<Account> findByBranch(Integer integer);
+    Optional<Account> findByBranch(String branch);
 }
