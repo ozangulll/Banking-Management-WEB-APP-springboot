@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Lists</title>
+</head>
+<body>
+<table>
+    <thead>
+<tr>
+    <th>ID</th>
+    <th>Branch</th>
+    <th>Balance</th>
+</tr>
+    </thead>
+    <tbody>
+    <tr th:each="account:${accounts}">
+        <td th:text="${account.id}"></td>
+        <td th:text="${account.branch}"></td>
+        <td th:text="${account.balance}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
