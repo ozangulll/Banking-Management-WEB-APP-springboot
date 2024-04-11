@@ -1,7 +1,7 @@
 package com.sau.bankingmanagement.repository;
 
-import com.sau.bankingmanagement.models.Withdrawals;
+import com.sau.bankingmanagement.models.Withdrawal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface WithdrawalRepository extends JpaRepository <Withdrawals,Integer> {
+public interface WithdrawalRepository extends JpaRepository <Withdrawal,Integer> {
 }

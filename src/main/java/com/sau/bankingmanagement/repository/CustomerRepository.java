@@ -1,8 +1,8 @@
 package com.sau.bankingmanagement.repository;
 
-import com.sau.bankingmanagement.models.Customers;
+import com.sau.bankingmanagement.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository <Customers,Integer>{
+public interface CustomerRepository extends JpaRepository <Customer,Integer>{
 
 }

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name="withdrawals")
-public class Withdrawals {
+public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="withdrawalId")
@@ -24,11 +24,11 @@ public class Withdrawals {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customers customer;
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
-    private Accounts account;
+    private Account account;
 
     @CreationTimestamp
     @Column(name="transactionDate")
