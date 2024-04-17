@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Account Lists</title>
@@ -11,6 +11,7 @@
     <th>ID</th>
     <th>Branch</th>
     <th>Balance</th>
+    <th>Action</th>
 </tr>
     </thead>
     <tbody>
@@ -18,6 +19,11 @@
         <td th:text="${account.id}"></td>
         <td th:text="${account.branch}"></td>
         <td th:text="${account.balance}"></td>
+        <td>
+            <form th:action="@{'/accounts/delete/' + ${account.id}}" method="post">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this account?')">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
