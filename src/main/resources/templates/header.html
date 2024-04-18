@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="flex items-center justify-between space-x-8 lg:space-x-16 md:space-x-3">
+        <!-- Logo -->
+        <div>
+            <a href="" class="pl-4 md:pl-0 text-4xl md:text-5xl lg:text-6xl font-bold text-black">Banking Management System</a>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-data="{open:false}" class="mb-4 mt-4">
+            <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
+            <div @click="open = !open" class="block lg:hidden pr-3 rounded ">
+                <div class="space-y-1 cursor-pointer ">
+                    <a href="#">
+                        <i class="fa-solid fa-bars fa-2xl" style="color: #2563eb;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <ul x-show="open" @click.outside="open = false" x-transition
+                class="absolute right-0 origin-top-right z-50 bg-blue-600 w-160px shadow-md py-1 mt-2 rounded-lg">
+
+                <li>
+                    <a class="py-1 px-2 flex hover:bg-blue-700 text-center text-white" href="">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <div x-data="{countryShow:false}" class="mb-4">
+                        <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
+                        <button @click="countryShow = !countryShow"
+                            class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                            Accounts
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
+                                :class="{'-rotate-90':countryShow}">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+
+                        </button>
+                        <div x-show="countryShow">
+                            <ul @click.outside="open = false" x-transition
+                                class="absolute bg-blue-600  w-160px shadow-md py-1 rounded-lg mt-2">
+                                <li>
+                                    <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
+                                        href="">
+                                        Create Account
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center" href="">
+                                        Accounts
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div x-data="{countryShow:false}" class="mb-4 z-10">
+                        <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
+                        <button @click="countryShow = !countryShow"
+                            class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                            Customers
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
+                                :class="{'-rotate-90':countryShow}">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                        <div x-show="countryShow">
+                            <ul @click.outside="open = false" x-transition
+                                class="absolute bg-blue-600  w-160px shadow-md py-1 rounded-lg mt-2">
+                                <li>
+                                    <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
+                                        href="create-customer.html">
+                                        Create Customer
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center" href="">
+                                        Customers
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class="py-1 px-2 flex hover:bg-blue-700 text-center text-white" href="">
+                        About
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="hidden lg:flex justify-between flex-1 flex-wrap">
+            <!-- Menu -->
+            <div class="flex lg:text-lg space-x-4 lg:space-x-8 z-10">
+                <div x-data="{countryShow:false}" class="mb-4">
+                    <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
+                    <a href="header.html" class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                        Home
+                    </a>
+                </div>
+
+                <div x-data="{countryShow:false}" class="mb-4">
+                    <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
+                    <button @click="countryShow = !countryShow"
+                        class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                        Accounts
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
+                            :class="{'-rotate-90':countryShow}">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+
+                    </button>
+                    <div x-show="countryShow">
+                        <ul @click.outside="open = false" x-transition
+                            class="absolute bg-blue-600  w-160px shadow-md py-1 rounded-lg mt-2">
+                            <li>
+                                <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
+                                    href="create-account.html">
+                                   Create Account
+                                </a>
+                            </li>
+                            <li>
+                                <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center" 
+                                href="manage-account.html">
+                                    Accounts
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div x-data="{countryShow:false}" class="mb-4 z-10">
+                    <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
+                    <button @click="countryShow = !countryShow"
+                        class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                        Customers
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
+                            :class="{'-rotate-90':countryShow}">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                    <div x-show="countryShow">
+                        <ul @click.outside="open = false" x-transition
+                            class="absolute bg-blue-600  w-160px shadow-md py-1 rounded-lg mt-2">
+                            <li>
+                                <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
+                                    href="create-customer.html">
+                                   Create Customer
+                                </a>
+                            </li>
+                            <li>
+                                <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center" 
+                                    href="manage-customer.html">
+                                    Customers
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div x-data="{countryShow:false}" class="mb-4">
+                    <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
+                    <a href="" class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                        About
+                    </a>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+    <br>
+    <hr>
+</body>
+</html>
