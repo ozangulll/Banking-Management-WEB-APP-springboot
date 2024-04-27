@@ -23,4 +23,5 @@ public class Customer {
     private String address;
     @Column(name="customerCity",length = 16)
     private String city;
+
 }

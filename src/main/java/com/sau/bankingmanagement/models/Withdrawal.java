@@ -23,14 +23,14 @@ public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="withdrawalId")
-    private int withdrawalid;
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customerId",nullable = false)
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "accountId",nullable = false)
     private Account account;
 
     @CreationTimestamp
@@ -38,5 +38,7 @@ public class Withdrawal {
     private LocalDateTime date;
 
     @Column(name="amount")
+    @Check(constraints = "amount >= 0")
     private BigDecimal amount;
+
 }
