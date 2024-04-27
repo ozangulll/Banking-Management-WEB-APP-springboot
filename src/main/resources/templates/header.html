@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://thymeleaf.org"
+xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header</title>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE" >Banking Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 </head>
-<body>
+<div>
     <div class="flex items-center justify-between space-x-8 lg:space-x-16 md:space-x-3">
         <!-- Logo -->
         <div>
@@ -40,11 +45,11 @@
                     <div x-data="{countryShow:false}" class="mb-4">
                         <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
                         <button @click="countryShow = !countryShow"
-                            class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                                class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
                             Accounts
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
-                                :class="{'-rotate-90':countryShow}">
+                                 stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
+                                 :class="{'-rotate-90':countryShow}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                             </svg>
 
@@ -54,7 +59,7 @@
                                 class="absolute bg-blue-600  w-160px shadow-md py-1 rounded-lg mt-2">
                                 <li>
                                     <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
-                                        href="">
+                                       href="">
                                         Create Account
                                     </a>
                                 </li>
@@ -71,11 +76,11 @@
                     <div x-data="{countryShow:false}" class="mb-4 z-10">
                         <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
                         <button @click="countryShow = !countryShow"
-                            class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                                class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
                             Customers
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
-                                :class="{'-rotate-90':countryShow}">
+                                 stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
+                                 :class="{'-rotate-90':countryShow}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                             </svg>
                         </button>
@@ -84,7 +89,7 @@
                                 class="absolute bg-blue-600  w-160px shadow-md py-1 rounded-lg mt-2">
                                 <li>
                                     <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
-                                        href="create-customer.html">
+                                       href="create-customer.html">
                                         Create Customer
                                     </a>
                                 </li>
@@ -119,11 +124,11 @@
                 <div x-data="{countryShow:false}" class="mb-4">
                     <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
                     <button @click="countryShow = !countryShow"
-                        class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                            class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
                         Accounts
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
-                            :class="{'-rotate-90':countryShow}">
+                             stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
+                             :class="{'-rotate-90':countryShow}">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
 
@@ -133,13 +138,13 @@
                             class="absolute bg-blue-600  w-160px shadow-md py-1 rounded-lg mt-2">
                             <li>
                                 <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
-                                    href="create-account.html">
-                                   Create Account
+                                   href="/accounts/add">
+                                    Create Account
                                 </a>
                             </li>
                             <li>
-                                <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center" 
-                                href="manage-account.html">
+                                <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
+                                   href="/accounts">
                                     Accounts
                                 </a>
                             </li>
@@ -150,11 +155,11 @@
                 <div x-data="{countryShow:false}" class="mb-4 z-10">
                     <!--false yerine true yapsaydık üst toggle menusu açık olarak gelecekti-->
                     <button @click="countryShow = !countryShow"
-                        class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                            class="inline-flex items-center py-2 px-6 bg-blue-600 hover:bg-opacity-95 text-white rounded-md shadow">
                         Customers
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
-                            :class="{'-rotate-90':countryShow}">
+                             stroke="currentColor" class="w-4 h-4 ml-2 transition-al"
+                             :class="{'-rotate-90':countryShow}">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
                     </button>
@@ -163,13 +168,13 @@
                             class="absolute bg-blue-600  w-160px shadow-md py-1 rounded-lg mt-2">
                             <li>
                                 <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
-                                    href="create-customer.html">
-                                   Create Customer
+                                   href="create-customer.html">
+                                    Create Customer
                                 </a>
                             </li>
                             <li>
-                                <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center" 
-                                    href="manage-customer.html">
+                                <a class="py-1 px-2 text-white hover:bg-blue-700 flex items-center"
+                                   href="manage-customer.html">
                                     Customers
                                 </a>
                             </li>
@@ -187,7 +192,9 @@
             </div>
         </nav>
     </div>
-    <br>
-    <hr>
+</div>
+<body layout:fragment="body">
+
 </body>
+
 </html>

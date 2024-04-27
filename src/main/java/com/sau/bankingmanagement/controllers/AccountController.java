@@ -16,6 +16,10 @@ import java.util.Optional;
 @Controller
 public class AccountController {
 private AccountRepository accountRepository;
+    @GetMapping("/")
+    public String showHomePage() {
+        return "header";
+    }
     @Autowired
     public AccountController(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -25,12 +29,14 @@ private AccountRepository accountRepository;
         List<Account> accounts=accountRepository.findAll();
         model.addAttribute("accounts",accounts);
         return "accounts-list";
+        //we use th:each for foreach loop in thymeleaf for instance th:each="account :${accounts}"
+        //the second one ACCOUNTS aslında bizi burada eklediğimiz addattribute'a denk gelmiş oluyor.
     }
     @GetMapping("/accounts/add")
     public String AddAccountForm(Model model){
         Account account=new Account();
         model.addAttribute("account",account);
-        return "add-account";
+        return "create-account";
     }
     @PostMapping("/accounts/add")
     public String AddAccount(@ModelAttribute("account") Account account){
