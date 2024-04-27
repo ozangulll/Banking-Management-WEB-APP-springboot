@@ -6,16 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="customers")
+@Table(name="customer")
 public class Customer {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="customerId")
     private int id;
     @Column(name="customerName",length = 16)
     private String name;
@@ -24,4 +27,6 @@ public class Customer {
     @Column(name="customerCity",length = 16)
     private String city;
 
+    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL)
+    private List<Withdrawal> withdrawals;
 }

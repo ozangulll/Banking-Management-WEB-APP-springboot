@@ -15,30 +15,27 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
-@Table(name="withdrawals")
-@Check(constraints = "amount=>0")
+@Table(name="withdrawal")
+@Check(constraints = "amount>=0")
 public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="withdrawalId")
     private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "customerId",nullable = false)
-    private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "accountId",nullable = false)
-    private Account account;
 
     @CreationTimestamp
     @Column(name="transactionDate")
     private LocalDateTime date;
 
     @Column(name="amount")
-    @Check(constraints = "amount >= 0")
     private BigDecimal amount;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id",nullable = false)
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
 
 }
