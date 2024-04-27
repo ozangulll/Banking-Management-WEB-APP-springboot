@@ -2,13 +2,12 @@ package com.sau.bankingmanagement.controllers;
 
 import com.sau.bankingmanagement.models.Account;
 import com.sau.bankingmanagement.repository.AccountRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +38,10 @@ private AccountRepository accountRepository;
         return "create-account";
     }
     @PostMapping("/accounts/add")
-    public String AddAccount(@ModelAttribute("account") Account account){
+    public String AddAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "create-account";
+        }
     accountRepository.save(account);
     return "redirect:/accounts";
     }
@@ -54,14 +56,23 @@ private AccountRepository accountRepository;
         accountRepository.deleteById(id);
         return "redirect:/accounts";
     }
+    @GetMapping("/accounts/search")
+    public String searchBranch(@RequestParam(value = "query") String query, Model model) {
+        List<Account> accounts = accountRepository.searchBranch(query);
+        model.addAttribute("accounts", accounts);
+        return "accounts-list";
+    }
     @GetMapping("accounts/update/{id}")
-    public  String UpdateAccountForm(@PathVariable("id") int id,Model model){
+    public  String UpdateAccountForm( @PathVariable("id") int id, Model model){
         Optional<Account> account=accountRepository.findById(id);
         model.addAttribute("account",account);
         return "update-account";
     }
     @PostMapping("accounts/update/{id}")
-    public  String UpdateAccount(@ModelAttribute("account") Account account){
+    public  String UpdateAccount(@ModelAttribute("account")  @Valid Account account, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "update-account";
+        }
 accountRepository.save(account);
 return "redirect:/accounts";
 

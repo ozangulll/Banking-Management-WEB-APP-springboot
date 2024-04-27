@@ -12,7 +12,15 @@
 <body class="bg-gray-100" layout:fragment="body">
      <header class=" py-6 pl-5 pr-5 lg:py-12 bg-white uppercase rounded-lg shadow-lg">
         <div class="">
+            <div>
+                <form th:action="@{/accounts/search}" class="flex items-center justify-center mt-6" method="GET">
+                    <label for="query" class="mr-2 text-gray-700"></label>
+                    <input style="width: 60%" name="query" id="query" class="form-input px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" type="search" placeholder="Search Account with branch name..." aria-label="Search">
+                    <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:bg-blue-600 focus:outline-none">Search</button>
+                </form>
 
+
+            </div>
             <div>
                 <div class=" ">
                     <table class="table-fixed  min-w-full text-white border rounded-lg shadow-sm">

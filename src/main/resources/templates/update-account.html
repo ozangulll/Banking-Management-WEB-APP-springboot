@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      >
+      layout:decorate="~{header}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body >
+<body layout:fragment="body" >
 <style>
+    .text-danger {
+        color: red;
+    }
     .-z-1 {
         z-index: -1;
     }
@@ -62,6 +65,7 @@
                         th:field="*{id}"
                 />
                 <label for="updateId" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">id</label>
+                <p th:if="${#fields.hasErrors('id')}" class="text-danger" th:errors="*{id}"></p>
             </div>
 
             <div class="relative z-0 w-full mb-5" >
@@ -74,6 +78,7 @@
                         th:field="*{branch}"
                 />
                 <label for="updateBranch" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">branch</label>
+                <p th:if="${#fields.hasErrors('branch')}" class="text-danger" th:errors="*{branch}"></p>
             </div>
 
             <div class="relative z-0 w-full mb-5" >
@@ -86,6 +91,7 @@
                         th:field="*{balance}"
                 />
                 <label for="updateBalance" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">balance</label>
+                <p th:if="${#fields.hasErrors('balance')}" class="text-danger" th:errors="*{balance}"></p>
             </div>
 
             <div class="flex justify-between">

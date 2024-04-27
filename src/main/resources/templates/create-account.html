@@ -10,6 +10,9 @@
 </head>
 <body layout:fragment="body">
     <style>
+        .text-danger {
+            color: red;
+        }
         .-z-1 {
           z-index: -1;
         }
@@ -60,8 +63,10 @@
               th:field="*{id}"
               placeholder=""
               class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+            required
             />
             <label for="inputId" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">id</label>
+              <p th:if="${#fields.hasErrors('id')}" class="text-danger" th:errors="*{id}"></p>
           </div>
       
             <div class="relative z-0 w-full mb-5">
@@ -73,6 +78,7 @@
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
               <label for="inputBranch" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">branch</label>
+                <p th:if="${#fields.hasErrors('branch')}" class="text-danger" th:errors="*{branch}"></p>
             </div>
     
          
@@ -85,6 +91,7 @@
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
               <label for="inputBalance" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">balance</label>
+                <p th:if="${#fields.hasErrors('balance')}" class="text-danger" th:errors="*{balance}"></p>
             </div>
     
                     <div class="flex justify-between">
