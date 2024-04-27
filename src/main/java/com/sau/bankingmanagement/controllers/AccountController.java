@@ -38,8 +38,12 @@ private AccountRepository accountRepository;
         return "create-account";
     }
     @PostMapping("/accounts/add")
-    public String AddAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult){
+    public String AddAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult,Model model){
         if(bindingResult.hasErrors()){
+            return "create-account";
+        }
+        if(accountRepository.existsById(account.getId())){
+            model.addAttribute("errorMessage", "An account with this ID already exists!");
             return "create-account";
         }
     accountRepository.save(account);
