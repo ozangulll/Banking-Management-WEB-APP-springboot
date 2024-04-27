@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -22,8 +23,7 @@ public class Account {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Id should not be null")
-    @Min(value = 1, message = "Id should be bigger than 0")
-    @Min(1)
+    @Min(value=1, message = "Id should be bigger than 0")
     private int id;
     @NotEmpty(message = "Branch should not be empty.")
     @Column(name="accountBranch",length=16)

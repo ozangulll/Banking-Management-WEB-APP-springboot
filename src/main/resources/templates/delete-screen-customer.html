@@ -6,10 +6,10 @@
     <title>Delete Confirmation</title>
 </head>
 <body>
-<h2>Are you sure you want to delete this account?</h2>
-<p>Account ID: ${account.id}</p>
-<p>Account Name: ${account.name}</p>
-<form action="/customers/delete/${account.id}" method="post">
+<h2>Are you sure you want to delete this customer?</h2>
+<p>Account ID: ${customer.id}</p>
+<p>Account Name: ${customer.name}</p>
+<form action="/customers/delete/${customer.id}" method="post">
     <button type="submit">Yes, delete</button>
     <a href="/customers">Cancel</a>
 </form>

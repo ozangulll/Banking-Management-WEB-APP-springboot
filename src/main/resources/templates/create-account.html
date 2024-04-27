@@ -67,6 +67,10 @@
             />
             <label for="inputId" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">id</label>
               <p th:if="${#fields.hasErrors('id')}" class="text-danger" th:errors="*{id}"></p>
+              <div th:if="${errorMessage}" class="text-danger">
+                  <p th:text="${errorMessage}"></p>
+              </div>
+
           </div>
       
             <div class="relative z-0 w-full mb-5">
@@ -84,7 +88,7 @@
          
             <div class="relative z-0 w-full mb-5">
               <input
-                type="text"
+                type="number"
                 id="inputBalance"
                 th:field="*{balance}"
                 placeholder=""
