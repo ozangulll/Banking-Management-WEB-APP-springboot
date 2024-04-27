@@ -49,7 +49,7 @@ private AccountRepository accountRepository;
     public String DeleteAccountScreen(@PathVariable("id") int id, Model model){
         Optional<Account> account = accountRepository.findById(id);
         model.addAttribute("account", account);
-        return "delete-screen";
+        return "delete-screen-account";
     }
     @PostMapping("/accounts/delete/{id}")
     public String deleteAccount(@PathVariable("id") int id){
