@@ -36,6 +36,6 @@ public class Customer {
     @Column(name="customerCity",length = 16)
     private String city;
 
-    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Withdrawal> withdrawals;
 }

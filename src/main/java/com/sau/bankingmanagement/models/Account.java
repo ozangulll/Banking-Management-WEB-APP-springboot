@@ -32,6 +32,6 @@ public class Account {
     @Column(name="accountBalance")
     private BigDecimal balance;
 
-    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
     private List<Withdrawal> withdrawals;
 }
