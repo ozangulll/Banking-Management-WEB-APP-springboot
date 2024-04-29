@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -117,7 +119,7 @@ public class WithdrawalController {
             existingWithdrawal.setAccount(withdrawal.getAccount());
             existingWithdrawal.setCustomer(withdrawal.getCustomer());
             existingWithdrawal.setAmount(withdrawal.getAmount());
-            existingWithdrawal.setDate(withdrawal.getDate());
+            existingWithdrawal.setUpdatedDate(LocalDateTime.now()); // Set the updatedDate
             withdrawalRepository.save(existingWithdrawal);
             return "redirect:/withdrawals";
         } else {
@@ -125,6 +127,7 @@ public class WithdrawalController {
             return "redirect:/withdrawals";
         }
     }
+
     @GetMapping("withdrawals/delete/{id}")
     public String deleteWithdrawalForm(@PathVariable("id") int id, Model model){
         Optional<Withdrawal> withdrawal = withdrawalRepository.findById(id);

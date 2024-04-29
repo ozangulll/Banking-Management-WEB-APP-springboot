@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +24,9 @@ public class WithdrawalView {
     private String accountBranch;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime updatedDate;
+
     private BigDecimal amount;
 
 }

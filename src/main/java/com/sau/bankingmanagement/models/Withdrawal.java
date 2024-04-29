@@ -7,9 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,11 +27,17 @@ public class Withdrawal {
     private int id;
 
     @CreationTimestamp
-    @Column(name="transactionDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
 
     @Column(name="amount")
     private BigDecimal amount;
+
+    @UpdateTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime updatedDate;
 
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)

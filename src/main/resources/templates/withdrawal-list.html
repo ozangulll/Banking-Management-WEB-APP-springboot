@@ -32,41 +32,42 @@
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Customer Name</th>
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Account Branch</th>
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Date</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black"> Updated Date</th>
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Amount</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Action</th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="border-b-2 border-gray-100" th:each="withdrawal:${withdrawals}">
-                        <td class=" text-center  px-3 py-4 text-black" th:text="${withdrawal.id}"></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customer.id}" ></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.account.id}"></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customer.name}"></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.account.branch}"></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.date}"></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.amount}"></td>
-                        <td class=" px-3 py-4 flex items-center justify-between">
-                            <form th:action="@{'/withdrawals/update/' + ${withdrawal.id}}" method="get">
-                                <a>
-                                    <button type='submit'  class="bg-blue-600 capitalize rounded-md px-2 py-1 hover:bg-blue-700">
-                                        <i class="fa-regular fa-pen-to-square fa-xs" style="color: #ffffff;"></i>
-                                        Update
-                                    </button>
-                                </a>
-                            </form>
-                            <form th:action="@{'/withdrawals/delete/' + ${withdrawal.id}}" method='post'>
-                                <input type="hidden" name='' value=''>
-                                <input type="hidden" name='' value=''>
-                                <button type='submit'  class="bg-red-600 capitalize rounded-md px-2 py-1 hover:bg-red-700" onclick="return confirm('Are you sure you want to delete this account?')">
-                                    <i class="fa-solid fa-trash fa-xs" style="color: #ffffff;" ></i>
-                                    Delete
+                    </thead>                        <tbody>
+                <tr class="border-b-2 border-gray-100" th:each="withdrawal:${withdrawals}">
+                    <td class=" text-center  px-3 py-4 text-black" th:text="${withdrawal.id}"></td>
+                    <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customer.id}" ></td>
+                    <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.account.id}"></td>
+                    <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customer.name}"></td>
+                    <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.account.branch}"></td>
+                    <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.date}"></td>
+                    <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.updatedDate}"></td>
+                    <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.amount}"></td>
+                    <td class=" px-3 py-4 flex items-center justify-between">
+                        <form th:action="@{'/withdrawals/update/' + ${withdrawal.id}}" method="get">
+                            <a>
+                                <button type='submit'  class="bg-blue-600 capitalize rounded-md px-2 py-1 hover:bg-blue-700">
+                                    <i class="fa-regular fa-pen-to-square fa-xs" style="color: #ffffff;"></i>
+                                    Update
                                 </button>
-                            </form>
-                        </td>
-                    </tr>
+                            </a>
+                        </form>
+                        <form th:action="@{'/withdrawals/delete/' + ${withdrawal.id}}" method='post'>
+                            <input type="hidden" name='' value=''>
+                            <input type="hidden" name='' value=''>
+                            <button type='submit'  class="bg-red-600 capitalize rounded-md px-2 py-1 hover:bg-red-700" onclick="return confirm('Are you sure you want to delete this account?')">
+                                <i class="fa-solid fa-trash fa-xs" style="color: #ffffff;" ></i>
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
 
 
-                    </tbody>
-                </table>
+                </tbody>                    </table>
             </div>
         </div>
     </div>
