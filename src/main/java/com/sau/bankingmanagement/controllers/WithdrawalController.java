@@ -10,10 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -126,6 +123,12 @@ public class WithdrawalController {
             // handle if withdrawal with given id does not exist
             return "redirect:/withdrawals";
         }
+    }
+    @GetMapping("/withdrawals/search")
+    public String searchName(@RequestParam(value = "query") String query, Model model) {
+        List<Withdrawal> withdrawals = withdrawalRepository.searchName(query);
+        model.addAttribute("withdrawals", withdrawals);
+        return "withdrawal-list";
     }
 
     @GetMapping("withdrawals/delete/{id}")
