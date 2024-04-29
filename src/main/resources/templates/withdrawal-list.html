@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{header}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100" layout:fragment="body">
+<header class=" py-6 pl-5 pr-5 lg:py-12 bg-white uppercase rounded-lg shadow-lg">
+    <div class="">
+        <div>
+            <form th:action="@{/withdrawals/search}" class="flex items-center justify-center mt-6" method="GET">
+                <label for="query" class="mr-2 text-gray-700"></label>
+                <input style="width: 60%" name="query" id="query" class="form-input px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" type="search" placeholder="Search Account with branch name..." aria-label="Search">
+                <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:bg-blue-600 focus:outline-none">Search</button>
+            </form>
+
+
+        </div>
+        <div>
+            <div class=" ">
+                <table class="table-fixed  min-w-full text-white border rounded-lg shadow-sm">
+                    <thead>
+                    <tr class="border-b-2 border-gray-100">
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">#</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Customer Id</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Account Id</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Customer Name</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Account Name</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Date</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="border-b-2 border-gray-100" th:each="withdrawal:${withdrawals}">
+                        <td class=" text-center  px-3 py-4 text-black" th:text="${withdrawal.id}"></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customerId}" ></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.accountId}"></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customerName}"></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.accountName}"></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.date}"></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.amount}"></td>
+                        <td class=" px-3 py-4 flex items-center justify-between">
+                            <form th:action="@{'/withdrawals/update/' + ${withdrawal.id}}" method="get">
+                                <a>
+                                    <button type='submit'  class="bg-blue-600 capitalize rounded-md px-2 py-1 hover:bg-blue-700">
+                                        <i class="fa-regular fa-pen-to-square fa-xs" style="color: #ffffff;"></i>
+                                        Update
+                                    </button>
+                                </a>
+                            </form>
+                            <form th:action="@{'/withdrawals/delete/' + ${withdrawal.id}}" method='post'>
+                                <input type="hidden" name='' value=''>
+                                <input type="hidden" name='' value=''>
+                                <button type='submit'  class="bg-red-600 capitalize rounded-md px-2 py-1 hover:bg-red-700" onclick="return confirm('Are you sure you want to delete this account?')">
+                                    <i class="fa-solid fa-trash fa-xs" style="color: #ffffff;" ></i>
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
