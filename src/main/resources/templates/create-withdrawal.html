@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account Withdrawal</title>
+</head>
+<body>
+<h2>Create Withdrawal</h2>
+<form action="/withdrawals/add" method="post" th:object="${withdrawal}">
+    <label for="customer">Customer:</label>
+    <select id="customer" name="customerId" th:field="*{customer.id}" required>
+        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+    </select><br><br>
+
+    <label for="account">Account:</label>
+    <select id="account" name="accountId" th:field="*{account.id}" required>
+        <option th:each="account : ${accounts}" th:value="${account.id}" th:text="${account.branch}"></option>
+    </select><br><br>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" step="0.01" min="0" th:field="*{amount}" required><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
