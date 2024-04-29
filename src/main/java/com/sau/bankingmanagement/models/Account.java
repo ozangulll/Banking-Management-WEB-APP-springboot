@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.NumberFormat;
 
 import java.math.BigDecimal;
@@ -27,6 +28,7 @@ public class Account {
     private int id;
     @NotEmpty(message = "Branch should not be empty.")
     @Column(name="accountBranch",length=16)
+    @Length(max = 16, message = "Branch name should not exceed 16 characters!")
     private String branch;
     @NotNull(message = "balance should not be null")
     @Column(name="accountBalance")

@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,8 +27,8 @@ public class Customer {
     @Min(value=1, message = "Id should be bigger than 0")
     private int id;
     @Column(name="customerName",length = 16)
+    @Length(max = 16,message = "Name length should not exceed 16 characters!")
     @NotEmpty(message = "Name should not be empty.")
-
     private String name;
     @NotEmpty(message = "Address should not be empty.")
     @Column(name="customerAddress", length = 32)
