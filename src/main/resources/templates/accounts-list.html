@@ -46,6 +46,14 @@
                                     </button>
                                 </a>
                            </form>
+                                <form th:action="@{'/withdrawals/account/' + ${account.id}}" method="get">
+                                    <a>
+                                        <button type='submit'  class="bg-green-600 capitalize rounded-md px-2 py-1 hover:bg-blue-700">
+                                            <i class="fa-regular fa-pen-to-square fa-xs" style="color: #ffffff;"></i>
+                                            See The Withdrawal Processes
+                                        </button>
+                                    </a>
+                                </form>
                               <form th:action="@{'/accounts/delete/' + ${account.id}}" method='post'>
                                     <input type="hidden" name='' value=''>
                                     <input type="hidden" name='' value=''>

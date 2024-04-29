@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -76,14 +78,35 @@ public class WithdrawalController {
     }
 
     @PostMapping("withdrawals/add")
-    public String addWithdrawal(@Valid @ModelAttribute("withdrawal") Withdrawal withdrawal, BindingResult bindingResult, Model model) {
+    public String addWithdrawal(@Valid @ModelAttribute("withdrawal") Withdrawal withdrawal, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            // Hata varsa, hata mesajlarını göster ve aynı formu tekrar göster
-            return "create-withdrawal";
+
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.withdrawal", bindingResult);
+            redirectAttributes.addFlashAttribute("withdrawal", withdrawal);
+            return "redirect:/withdrawals/add";
         }
 
+        Optional<Account> accountOptional = accountRepository.findById(withdrawal.getAccount().getId());
+        if (!accountOptional.isPresent()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Account not found");
+            return "redirect:/withdrawals/add";
+        }
+
+        Account account = accountOptional.get();
+        BigDecimal withdrawalAmount = withdrawal.getAmount();
+        BigDecimal currentBalance = account.getBalance();
+        if (currentBalance.compareTo(withdrawalAmount) < 0) {
+
+            redirectAttributes.addFlashAttribute("errorMessage", "Insufficient balance");
+            return "redirect:/withdrawals/add";
+        }
+
+
+        BigDecimal updatedBalance = currentBalance.subtract(withdrawalAmount);
+        account.setBalance(updatedBalance);
+        accountRepository.save(account);
         withdrawalRepository.save(withdrawal);
-        return "redirect:/withdrawals"; // Doğru şekilde yönlendirme yapılıyor
+        return "redirect:/withdrawals";
     }
 
 
@@ -91,12 +114,12 @@ public class WithdrawalController {
     public String updateWithdrawalForm(@PathVariable("id") int id, Model model) {
         Optional<Withdrawal> optionalWithdrawal = withdrawalRepository.findById(id);
         if (optionalWithdrawal.isPresent()) {
-            List<Account> accounts=accountRepository.findAll();
-            List<Customer> customers=customerRepository.findAll();
+            List<Account> accounts = accountRepository.findAll();
+            List<Customer> customers = customerRepository.findAll();
             Withdrawal withdrawal = optionalWithdrawal.get();
             model.addAttribute("withdrawal", withdrawal);
             model.addAttribute("accounts", accounts);
-            model.addAttribute("customers",customers);
+            model.addAttribute("customers", customers);
 
             return "update-withdrawal";
         } else {
@@ -105,25 +128,40 @@ public class WithdrawalController {
     }
 
     @PostMapping("/withdrawals/update/{id}")
-    public String updateWithdrawal(@PathVariable("id") int id, @ModelAttribute("withdrawal") @Valid Withdrawal withdrawal, BindingResult bindingResult) {
+    public String updateWithdrawal(@PathVariable("id") int id, @ModelAttribute("withdrawal") @Valid Withdrawal withdrawal, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "update-withdrawal";
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.withdrawal", bindingResult);
+            redirectAttributes.addFlashAttribute("withdrawal", withdrawal);
+            return "redirect:/withdrawals/update/" + id;
         }
 
         Optional<Withdrawal> optionalWithdrawal = withdrawalRepository.findById(id);
         if (optionalWithdrawal.isPresent()) {
             Withdrawal existingWithdrawal = optionalWithdrawal.get();
-            existingWithdrawal.setAccount(withdrawal.getAccount());
-            existingWithdrawal.setCustomer(withdrawal.getCustomer());
-            existingWithdrawal.setAmount(withdrawal.getAmount());
+            BigDecimal withdrawalAmount = withdrawal.getAmount();
+            Account account = existingWithdrawal.getAccount();
+            BigDecimal currentBalance = account.getBalance();
+            BigDecimal oldWithdrawalAmount = existingWithdrawal.getAmount();
+            if (withdrawalAmount.compareTo(oldWithdrawalAmount) > 0) {
+                BigDecimal difference = withdrawalAmount.subtract(oldWithdrawalAmount);
+                if (currentBalance.compareTo(difference) < 0) {
+                    redirectAttributes.addFlashAttribute("errorMessage", "Insufficient balance");
+                    return "redirect:/withdrawals/update/" + id;
+                }
+            }
+            BigDecimal updatedBalance = currentBalance.add(oldWithdrawalAmount).subtract(withdrawalAmount);
+            account.setBalance(updatedBalance);
+            existingWithdrawal.setAmount(withdrawalAmount);
             existingWithdrawal.setUpdatedDate(LocalDateTime.now()); // Set the updatedDate
             withdrawalRepository.save(existingWithdrawal);
+            accountRepository.save(account);
             return "redirect:/withdrawals";
         } else {
-            // handle if withdrawal with given id does not exist
+
             return "redirect:/withdrawals";
         }
     }
+
     @GetMapping("/withdrawals/search")
     public String searchName(@RequestParam(value = "query") String query, Model model) {
         List<Withdrawal> withdrawals = withdrawalRepository.searchName(query);
