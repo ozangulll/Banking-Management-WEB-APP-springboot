@@ -30,7 +30,7 @@
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Customer Id</th>
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Account Id</th>
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Customer Name</th>
-                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Account Name</th>
+                        <th class=" bg-gray-100 px-3 py-3.5 text-black">Account Branch</th>
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Date</th>
                         <th class=" bg-gray-100 px-3 py-3.5 text-black">Amount</th>
                     </tr>
@@ -38,10 +38,10 @@
                     <tbody>
                     <tr class="border-b-2 border-gray-100" th:each="withdrawal:${withdrawals}">
                         <td class=" text-center  px-3 py-4 text-black" th:text="${withdrawal.id}"></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customerId}" ></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.accountId}"></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customerName}"></td>
-                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.accountName}"></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customer.id}" ></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.account.id}"></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.customer.name}"></td>
+                        <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.account.branch}"></td>
                         <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.date}"></td>
                         <td class=" text-center px-3 py-4 text-black" th:text="${withdrawal.amount}"></td>
                         <td class=" px-3 py-4 flex items-center justify-between">

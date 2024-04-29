@@ -88,19 +88,42 @@ public class WithdrawalController {
     }
 
 
-    @GetMapping("withdrawals/update/{id}")
-    public String updateWithdrawalForm(@PathVariable("id") int id,Model model ){
-        Optional<Withdrawal> withdrawal= withdrawalRepository.findById(id);
-        model.addAttribute("withdrawal",withdrawal);
-        return "update-withdrawal";
+    @GetMapping("/withdrawals/update/{id}")
+    public String updateWithdrawalForm(@PathVariable("id") int id, Model model) {
+        Optional<Withdrawal> optionalWithdrawal = withdrawalRepository.findById(id);
+        if (optionalWithdrawal.isPresent()) {
+            List<Account> accounts=accountRepository.findAll();
+            List<Customer> customers=customerRepository.findAll();
+            Withdrawal withdrawal = optionalWithdrawal.get();
+            model.addAttribute("withdrawal", withdrawal);
+            model.addAttribute("accounts", accounts);
+            model.addAttribute("customers",customers);
+
+            return "update-withdrawal";
+        } else {
+            return "redirect:/withdrawals";
+        }
     }
-    @PostMapping("withdrawals/update/{id}")
-    public  String updateWithdrawal(@ModelAttribute("withdrawal") @Valid Withdrawal withdrawal, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+
+    @PostMapping("/withdrawals/update/{id}")
+    public String updateWithdrawal(@PathVariable("id") int id, @ModelAttribute("withdrawal") @Valid Withdrawal withdrawal, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "update-withdrawal";
         }
-        withdrawalRepository.save(withdrawal);
-        return "redirect:/withdrawals";
+
+        Optional<Withdrawal> optionalWithdrawal = withdrawalRepository.findById(id);
+        if (optionalWithdrawal.isPresent()) {
+            Withdrawal existingWithdrawal = optionalWithdrawal.get();
+            existingWithdrawal.setAccount(withdrawal.getAccount());
+            existingWithdrawal.setCustomer(withdrawal.getCustomer());
+            existingWithdrawal.setAmount(withdrawal.getAmount());
+            existingWithdrawal.setDate(withdrawal.getDate());
+            withdrawalRepository.save(existingWithdrawal);
+            return "redirect:/withdrawals";
+        } else {
+            // handle if withdrawal with given id does not exist
+            return "redirect:/withdrawals";
+        }
     }
     @GetMapping("withdrawals/delete/{id}")
     public String deleteWithdrawalForm(@PathVariable("id") int id, Model model){

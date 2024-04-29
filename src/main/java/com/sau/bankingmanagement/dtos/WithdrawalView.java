@@ -20,7 +20,7 @@ public class WithdrawalView {
     private int customerId;
     private int accountId;
     private String customerName;
-    private String accountName;
+    private String accountBranch;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime date;
     private BigDecimal amount;

@@ -27,6 +27,7 @@ public class Customer {
     private int id;
     @Column(name="customerName",length = 16)
     @NotEmpty(message = "Name should not be empty.")
+
     private String name;
     @NotEmpty(message = "Address should not be empty.")
     @Column(name="customerAddress", length = 32)
