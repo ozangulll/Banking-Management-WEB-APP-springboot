@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +37,7 @@ public class WithdrawalController {
     public String getAllWithdrawals(Model model){
         List<Withdrawal> withdrawals=withdrawalRepository.findAll();
         model.addAttribute("withdrawals",withdrawals);
-        return "withdrawal-list";
+        return "/withdrawal/withdrawal-list";
     }
     @GetMapping("withdrawals/customer/{customerid}")
     public String getWithdrawalsForCustomerId(@PathVariable("customerid") int customerId, Model model) {
@@ -47,7 +46,7 @@ public class WithdrawalController {
             Customer customer = customerOptional.get();
             List<Withdrawal> withdrawals = withdrawalRepository.findByCustomer(customer);
             model.addAttribute("withdrawals", withdrawals);
-            return "withdrawal-list"; // Assuming there's a view named "withdrawal-list" to display withdrawals
+            return "/withdrawal/withdrawal-list"; // Assuming there's a view named "withdrawal-list" to display withdrawals
         } else {
             return "customer-not-found"; // Example: return a view indicating customer not found
         }
@@ -60,7 +59,7 @@ public class WithdrawalController {
             Account account = accountOptional.get();
             List<Withdrawal> withdrawals = withdrawalRepository.findByAccount(account);
             model.addAttribute("withdrawals", withdrawals);
-            return "withdrawal-list"; // Assuming there's a view named "withdrawal-list" to display withdrawals
+            return "/withdrawal/withdrawal-list"; // Assuming there's a view named "withdrawal-list" to display withdrawals
         } else {
             return "account-not-found"; // Example: return a view indicating account not found
         }
@@ -73,7 +72,7 @@ public class WithdrawalController {
         model.addAttribute("withdrawal",withdrawal);
         model.addAttribute("customers",customers);
         model.addAttribute("accounts",accounts);
-        return "create-withdrawal";
+        return "/withdrawal/create-withdrawal";
 
     }
 
@@ -121,7 +120,7 @@ public class WithdrawalController {
             model.addAttribute("accounts", accounts);
             model.addAttribute("customers", customers);
 
-            return "update-withdrawal";
+            return "/withdrawal/update-withdrawal";
         } else {
             return "redirect:/withdrawals";
         }
@@ -166,14 +165,14 @@ public class WithdrawalController {
     public String searchName(@RequestParam(value = "query") String query, Model model) {
         List<Withdrawal> withdrawals = withdrawalRepository.searchName(query);
         model.addAttribute("withdrawals", withdrawals);
-        return "withdrawal-list";
+        return "/withdrawal/withdrawal-list";
     }
 
     @GetMapping("withdrawals/delete/{id}")
     public String deleteWithdrawalForm(@PathVariable("id") int id, Model model){
         Optional<Withdrawal> withdrawal = withdrawalRepository.findById(id);
         model.addAttribute("withdrawal", withdrawal);
-        return "delete-screen-withdrawal";
+        return "/withdrawal/delete-screen-withdrawal";
     }
     @PostMapping("withdrawals/delete/{id}")
     public String deleteWithdrawal(@PathVariable("id") int id){

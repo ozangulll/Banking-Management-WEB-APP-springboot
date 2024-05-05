@@ -27,7 +27,7 @@ private AccountRepository accountRepository;
     public String listAccounts(Model model){
         List<Account> accounts=accountRepository.findAll();
         model.addAttribute("accounts",accounts);
-        return "accounts-list";
+        return "/account/accounts-list";
         //we use th:each for foreach loop in thymeleaf for instance th:each="account :${accounts}"
         //the second one ACCOUNTS aslında bizi burada eklediğimiz addattribute'a denk gelmiş oluyor.
     }
@@ -35,16 +35,16 @@ private AccountRepository accountRepository;
     public String AddAccountForm(Model model){
         Account account=new Account();
         model.addAttribute("account",account);
-        return "create-account";
+        return "/account/create-account";
     }
     @PostMapping("/accounts/add")
     public String AddAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult,Model model){
         if(bindingResult.hasErrors()){
-            return "create-account";
+            return "/account/create-account";
         }
         if(accountRepository.existsById(account.getId())){
             model.addAttribute("errorMessage", "An account with this ID already exists!");
-            return "create-account";
+            return "/account/create-account";
         }
     accountRepository.save(account);
     return "redirect:/accounts";
@@ -53,7 +53,7 @@ private AccountRepository accountRepository;
     public String DeleteAccountScreen(@PathVariable("id") int id, Model model){
         Optional<Account> account = accountRepository.findById(id);
         model.addAttribute("account", account);
-        return "delete-screen-account";
+        return "/account/delete-screen-account";
     }
     @PostMapping("/accounts/delete/{id}")
     public String deleteAccount(@PathVariable("id") int id){
@@ -64,18 +64,18 @@ private AccountRepository accountRepository;
     public String searchBranch(@RequestParam(value = "query") String query, Model model) {
         List<Account> accounts = accountRepository.searchBranch(query);
         model.addAttribute("accounts", accounts);
-        return "accounts-list";
+        return "/account/accounts-list";
     }
     @GetMapping("accounts/update/{id}")
     public  String UpdateAccountForm( @PathVariable("id") int id, Model model){
         Optional<Account> account=accountRepository.findById(id);
         model.addAttribute("account",account);
-        return "update-account";
+        return "/account/update-account";
     }
     @PostMapping("accounts/update/{id}")
     public  String UpdateAccount(@ModelAttribute("account")  @Valid Account account, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "update-account";
+            return "/account/update-account";
         }
 accountRepository.save(account);
 return "redirect:/accounts";
