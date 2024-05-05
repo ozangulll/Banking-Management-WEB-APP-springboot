@@ -32,6 +32,7 @@ public class Account {
     private String branch;
     @NotNull(message = "balance should not be null")
     @Column(name="accountBalance")
+    @Min(value=1, message = "Balance should be bigger than 0")
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)

@@ -80,9 +80,9 @@ public class CustomerController {
     }
     @GetMapping("/customers/search")
     public String searchName(@RequestParam(value = "query") String query, Model model) {
-        List<Account> customers = customerRepository.searchName(query);
+        List<Customer> customers = customerRepository.searchName(query);
         model.addAttribute("customers", customers);
-        return "customer-list";
+        return "customers-list";
     }
 
 

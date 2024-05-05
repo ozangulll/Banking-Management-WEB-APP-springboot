@@ -13,7 +13,7 @@ public interface CustomerRepository extends JpaRepository <Customer,Integer>{
     Optional<Customer> findByAddress(String address);
 
     @Query("select c from Customer c where c.name LIKE CONCAT('%',:query,'%')")
-    List<Account> searchName(String query);
+    List<Customer> searchName(String query);
 
 
 
